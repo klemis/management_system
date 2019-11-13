@@ -36,11 +36,15 @@ def main():
         patient_id = db.create_patient(conn, patient_3)
         print('Last row id : {}'.format(patient_id))
 
+        db.update_patients(conn, ('U', 'U', '0.0.0', 'U', 123090847, 'U@u.pl', patient_id))
+
 
 if __name__ == "__main__":
     main()
 
-#TODO
+# TODO
+# Database operations:
+#   - update specific fields in row instead of the whole row (default actual values)
 # Manage patients (add, remove, update)
 # Book an appointment
 # Search records

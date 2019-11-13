@@ -39,3 +39,23 @@ class DatabaseOperation:
         cur = conn.cursor()
         cur.execute(sql, patient)
         return cur.lastrowid
+
+    def update_patients(self, conn, patient):
+        """
+        update
+        :param conn:
+        :param patient:
+        :return: patient id
+        """
+        sql = ''' UPDATE patients
+                  SET   name = ?,
+                        surname = ?,
+                        birthdate = ?, 
+                        address = ?, 
+                        telephone = ?, 
+                        email = ?
+                  WHERE id = ?'''
+
+        cur = conn.cursor()
+        cur.execute(sql, patient)
+        conn.commit()
