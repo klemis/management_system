@@ -1,7 +1,9 @@
 import sqlite3
 from sqlite3 import Error
 
+
 class DatabaseOperation:
+
     def __init__(self, db_file):
         self.db_file = db_file
 
@@ -50,9 +52,9 @@ class DatabaseOperation:
         sql = ''' UPDATE patients
                   SET   name = ?,
                         surname = ?,
-                        birthdate = ?, 
-                        address = ?, 
-                        telephone = ?, 
+                        birthdate = ?,
+                        address = ?,
+                        telephone = ?,
                         email = ?
                   WHERE id = ?'''
 

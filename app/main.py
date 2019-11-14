@@ -14,7 +14,13 @@ def main():
                                             email text NOT NULL
                                         ); """
 
-    person_1 = ManagePatient('Tomasz', 'Chada', '04.02.1977', 'Bialystok', '123090847', 'tomek@tomek.pl')
+    person_1 = ManagePatient('Tomasz',
+                             'Chada',
+                             '04.02.1977',
+                             'Bialystok',
+                             '123090847',
+                             'tomek@tomek.pl')
+
     person_1.print_patient_info()
 
     db = DatabaseOperation(database)
@@ -28,15 +34,39 @@ def main():
 
     with conn:
         # create a new patient
-        patient_1 = ('Tomasz', 'Chada', '01.02.1977', 'Bialystok', 123090847, 'tomek@tomek.pl')
-        patient_2 = ('Andzej', 'Dupa', '14.02.1977', 'Sady', 123090847, 'Andzej@tomek.pl')
-        patient_3 = ('Pawel', 'Abc', '22.02.1977', 'Pola', 123090847, 'Pawel@tomek.pl')
+        patient_1 = ('Tomasz',
+                     'Chada',
+                     '01.02.1977',
+                     'Bialystok',
+                     123090847,
+                     'tomek@tomek.pl')
+
+        patient_2 = ('Andzej',
+                     'Dupa',
+                     '14.02.1977',
+                     'Sady',
+                     123090847,
+                     'Andzej@tomek.pl')
+
+        patient_3 = ('Pawel',
+                     'Abc',
+                     '22.02.1977',
+                     'Pola',
+                     123090847,
+                     'Pawel@tomek.pl')
+
         db.create_data(conn, patient_1)
         db.create_data(conn, patient_2)
         patient_id = db.create_data(conn, patient_3)
         print('Last row id : {}'.format(patient_id))
 
-        db.update_data(conn, ('U', 'U', '0.0.0', 'U', 123090847, 'U@u.pl', patient_id))
+        db.update_data(conn, ('U',
+                              'U',
+                              '0.0.0',
+                              'U',
+                              123090847,
+                              'U@u.pl',
+                              patient_id))
 
         db.select_data(conn, 10)
 
@@ -48,7 +78,8 @@ if __name__ == "__main__":
 
 # TODO
 # Database operations:
-#   - update specific fields in row instead of the whole row (default actual values)
+#   - update specific fields in row instead
+#   of the whole row (default actual values)
 # Manage patients (add, remove, update)
 # Book an appointment
 # Search records
