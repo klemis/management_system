@@ -28,7 +28,7 @@ class DatabaseOperation:
         except Error as e:
             print(e)
 
-    def create_patient(self, conn, patient):
+    def create_data(self, conn, patient):
         """Create a new patient into patients table
         :param conn:
         :param patient:
@@ -40,7 +40,7 @@ class DatabaseOperation:
         cur.execute(sql, patient)
         return cur.lastrowid
 
-    def update_patients(self, conn, patient):
+    def update_data(self, conn, patient):
         """
         update
         :param conn:
@@ -58,4 +58,31 @@ class DatabaseOperation:
 
         cur = conn.cursor()
         cur.execute(sql, patient)
+        conn.commit()
+
+    def select_data(self, conn, id):
+        """
+        Query data by id
+        :param conn: the Connection object
+        :param id:
+        :return:
+        """
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM patients WHERE id=?", (id,))
+
+        rows = cur.fetchall()
+
+        for row in rows:
+            print(row)
+
+    def delete_data(self, conn, id):
+        """
+        Delete a data by id
+        :param conn:  Connection to the SQLite database
+        :param id: id of the patient
+        :return:
+        """
+        sql = 'DELETE FROM patients WHERE id=?'
+        cur = conn.cursor()
+        cur.execute(sql, (id,))
         conn.commit()

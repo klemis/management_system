@@ -28,15 +28,19 @@ def main():
 
     with conn:
         # create a new patient
-        patient_1 = ('Tomasz', 'Chada', '01.02.1977', 'Bialystok', 123090847, 'tomek@tomek.pl');
-        patient_2 = ('Andzej', 'Dupa', '14.02.1977', 'Sady', 123090847, 'Andzej@tomek.pl');
-        patient_3 = ('Pawel', 'Abc', '22.02.1977', 'Pola', 123090847, 'Pawel@tomek.pl');
-        db.create_patient(conn, patient_1)
-        db.create_patient(conn, patient_2)
-        patient_id = db.create_patient(conn, patient_3)
+        patient_1 = ('Tomasz', 'Chada', '01.02.1977', 'Bialystok', 123090847, 'tomek@tomek.pl')
+        patient_2 = ('Andzej', 'Dupa', '14.02.1977', 'Sady', 123090847, 'Andzej@tomek.pl')
+        patient_3 = ('Pawel', 'Abc', '22.02.1977', 'Pola', 123090847, 'Pawel@tomek.pl')
+        db.create_data(conn, patient_1)
+        db.create_data(conn, patient_2)
+        patient_id = db.create_data(conn, patient_3)
         print('Last row id : {}'.format(patient_id))
 
-        db.update_patients(conn, ('U', 'U', '0.0.0', 'U', 123090847, 'U@u.pl', patient_id))
+        db.update_data(conn, ('U', 'U', '0.0.0', 'U', 123090847, 'U@u.pl', patient_id))
+
+        db.select_data(conn, 10)
+
+        db.delete_data(conn, 79)
 
 
 if __name__ == "__main__":
