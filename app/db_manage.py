@@ -1,6 +1,6 @@
 from configparser import ConfigParser
 from mysql.connector import MySQLConnection, Error
- 
+
 
 class DatabaseOperation:
 
@@ -21,7 +21,7 @@ class DatabaseOperation:
             for item in items:
                 db[item[0]] = item[1]
         else:
-            raise Exception('{0} not found in the {1} file'.format(section, filename))
+            raise Exception('{0} not in {1} file'.format(section, filename))
 
         return db
 
@@ -37,15 +37,15 @@ class DatabaseOperation:
                 print('Connected to MySQL database')
             else:
                 print('Connection failed')
-     
+
         except Error as e:
             print(e)
-     
+
         finally:
             if conn is not None and conn.is_connected():
                 conn.close()
- 
- 
+
+
 if __name__ == '__main__':
     db = DatabaseOperation()
     db.connect()
