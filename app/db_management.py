@@ -1,3 +1,8 @@
+""" DEPRECATED !!! : 
+sqlite enables one connection at the time
+Mysql database used instead
+"""
+
 import sqlite3
 from sqlite3 import Error
 
