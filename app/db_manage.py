@@ -41,11 +41,43 @@ class DatabaseOperation:
         except Error as e:
             print(e)
 
+        return conn
+
+    def create_table(self):
+        try:
+            conn = self.connect()
+            cursor = conn.cursor()
+            cursor.execute("CREATE TABLE IF NOT EXISTS patients (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), surname VARCHAR(255), birthdate VARCHAR(255), address VARCHAR(255), telephone INT, email VARCHAR(255))")
+
+        except Error as e:
+            print(e)
+
         finally:
-            if conn is not None and conn.is_connected():
-                conn.close()
+            self.disconnect(conn)
+
+    def query_with_fetchone(self):
+        try:
+            conn = self.connect()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM patients")
+
+            row = cursor.fetchone()
+
+            while row is not None:
+                print(row)
+                row = cursor.fetchone()
+
+        except Error as e:
+            print(e)
+
+        finally:
+            self.disconnect(conn)
+
+    def disconnect(self, conn):
+        if conn is not None and conn.is_connected():
+            conn.close()
 
 
 if __name__ == '__main__':
     db = DatabaseOperation()
-    db.connect()
+    db.query_with_fetchone()
