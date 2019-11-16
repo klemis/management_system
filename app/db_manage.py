@@ -79,6 +79,53 @@ class DatabaseOperation:
         finally:
             self.disconnect(conn)
 
+    def insert_record(self, name, surname, birthdate, address, telephone, email):
+        query = "INSERT INTO patients(name,surname,birthdate,address,telephone,email) " \
+                "VALUES(%s,%s,%s,%s,%s,%s)"
+
+        args = (name, surname, birthdate, address, telephone, email)
+
+        try:
+            conn = self.connect()
+            cursor = conn.cursor()
+            cursor.execute(query, args)
+
+            if cursor.lastrowid:
+                print('last insert id', cursor.lastrowid)
+            else:
+                print('last insert id not found')
+
+            conn.commit()
+
+        except Error as error:
+            print(error)
+
+        finally:
+            self.disconnect(conn)
+
+    def update_record(self, patient_id, title):
+        # prepare query and data
+        query = """ UPDATE patients
+                    SET name = %s
+                    WHERE id = %s """
+
+        data = (title, patient_id)
+
+        try:
+            conn = self.connect()
+            # update book title
+            cursor = conn.cursor()
+            cursor.execute(query, data)
+
+            # accept the changes
+            conn.commit()
+
+        except Error as error:
+            print(error)
+
+        finally:
+            self.disconnect(conn)
+
     def disconnect(self, conn):
         if conn is not None and conn.is_connected():
             conn.close()
@@ -86,4 +133,6 @@ class DatabaseOperation:
 
 if __name__ == '__main__':
     db = DatabaseOperation()
+    db.insert_record('Andrzej', 'Dupka', '01.02.1977', 'Bialystok', 123090847, 'tomek@tomek.pl')
+    db.update_record(2, 'Marek')
     db.query_with_fetchone()
