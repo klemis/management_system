@@ -47,8 +47,14 @@ class DatabaseOperation:
         try:
             conn = self.connect()
             cursor = conn.cursor()
-            cursor.execute("CREATE TABLE IF NOT EXISTS patients (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), surname VARCHAR(255), birthdate VARCHAR(255), address VARCHAR(255), telephone INT, email VARCHAR(255))")
-
+            cursor.execute("""CREATE TABLE IF NOT EXISTS patients (
+                                            id INT AUTO_INCREMENT PRIMARY KEY,
+                                            name VARCHAR(255),
+                                            surname VARCHAR(255),
+                                            birthdate VARCHAR(255),
+                                            address tVARCHAR(255),
+                                            telephone INT,
+                                            email VARCHAR(255))""")
         except Error as e:
             print(e)
 
