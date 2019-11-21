@@ -2,10 +2,25 @@
 Unit tests for DatabaseOperation class
 """
 
-# from db_management import DatabaseOperation
+import pytest
+from mock import Mock
+from app.db_manage import DatabaseOperation
 
 
-class TestDatabaseOperation:
+@pytest.fixture
+def database():
+    return DatabaseOperation()
 
-    def test_create_connection(self):
-        pass
+
+@pytest.fixture
+def mock_db():
+    return Mock(spec=DatabaseOperation)
+
+
+def test_config_read(database):
+    db_config = database.read_db_config()
+    assert db_config == {'host': 'localhost', 'database': 'python_mysql', 'user': 'root', 'password': 'password'}
+
+
+def test_update_record(database):
+    database.update_record(2, 'Marek')
