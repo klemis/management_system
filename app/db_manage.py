@@ -52,7 +52,7 @@ class DatabaseOperation:
                                             name VARCHAR(255),
                                             surname VARCHAR(255),
                                             birthdate VARCHAR(255),
-                                            address tVARCHAR(255),
+                                            address VARCHAR(255),
                                             telephone INT,
                                             email VARCHAR(255))""")
         except Error as e:
@@ -103,17 +103,16 @@ class DatabaseOperation:
         finally:
             self.disconnect(conn)
 
-    def update_record(self, patient_id, title):
+    def update_record(self, patient_id, name):
         # prepare query and data
         query = """ UPDATE patients
                     SET name = %s
                     WHERE id = %s """
 
-        data = (title, patient_id)
+        data = (name, patient_id)
 
         try:
             conn = self.connect()
-            # update book title
             cursor = conn.cursor()
             cursor.execute(query, data)
 
